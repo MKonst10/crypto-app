@@ -10,6 +10,7 @@ const headerStyle = {
   height: 60,
   padding: "1rem",
   display: "flex",
+  gap: 20,
   justifyContent: "space-between",
   alignItems: "center",
 };
@@ -39,7 +40,7 @@ export default function AppHeader() {
   return (
     <Header style={headerStyle}>
       <Select
-        style={{ width: "250px" }}
+        style={{ width: "100%", maxWidth: "250px" }}
         value="Press / to open"
         options={crypto.map((coin) => ({
           label: coin.name,
