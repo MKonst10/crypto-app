@@ -8,6 +8,21 @@ const CryptoContext = createContext({
   loading: false,
 });
 
+const LOCAL_STORAGE_KEY = "crypto-assets";
+
+function loadAssetsFromStorage() {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveAssetsToStorage(assets) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(assets));
+}
+
 export function CryptoContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
@@ -30,21 +45,51 @@ export function CryptoContextProvider({ children }) {
   }
 
   useEffect(() => {
+    if (!crypto || crypto.length === 0) return;
+
+    const storedAssets = loadAssetsFromStorage();
+    setAssets(mapAssets(storedAssets, crypto));
+  }, [crypto]);
+
+  useEffect(() => {
     async function preload() {
       setLoading(true);
       const { result } = await fetchCrypto();
-      const assets = await fetchAssets();
-
       setCrypto(result);
-      setAssets(mapAssets(assets, result));
       setLoading(false);
     }
     preload();
   }, []);
 
   function addAsset(newAsset) {
-    setAssets((prev) => mapAssets([...prev, newAsset], crypto));
+    const existing = assets.find((a) => a.id === newAsset.id);
+
+    let updatedAssets;
+
+    if (existing) {
+      const totalAmount = existing.amount + newAsset.amount;
+      const totalCost =
+        existing.amount * existing.price + newAsset.amount * newAsset.price;
+      const avgPrice = totalCost / totalAmount;
+
+      const mergedAsset = {
+        ...existing,
+        amount: totalAmount,
+        price: avgPrice,
+        date: newAsset.date,
+      };
+
+      updatedAssets = assets.map((a) =>
+        a.id === newAsset.id ? mergedAsset : a
+      );
+    } else {
+      updatedAssets = [...assets, newAsset];
+    }
+
+    setAssets(mapAssets(updatedAssets, crypto));
+    saveAssetsToStorage(updatedAssets);
   }
+
   return (
     <CryptoContext.Provider value={{ loading, crypto, assets, addAsset }}>
       {children}

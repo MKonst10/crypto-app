@@ -12,6 +12,10 @@ const siderStyle = {
 export default function AppSider() {
   const { assets } = useContext(CryptoContext);
 
+  if (!assets.length) {
+    return null;
+  }
+
   return (
     <Sider width="25%" style={siderStyle}>
       {assets.map((asset) => (

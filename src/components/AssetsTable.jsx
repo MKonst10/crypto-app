@@ -34,5 +34,12 @@ export default function AssetsTable() {
     amount: a.amount,
   }));
 
-  return <Table pagination={false} columns={columns} dataSource={data} />;
+  return (
+    <Table
+      pagination={false}
+      columns={columns}
+      dataSource={data}
+      style={{ width: "100%" }}
+    />
+  );
 }
