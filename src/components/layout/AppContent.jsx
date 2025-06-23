@@ -1,4 +1,5 @@
-import { Layout } from "antd";
+import { Layout, Typography } from "antd";
+import { useCrypto } from "../../context/crypto-context";
 const { Content } = Layout;
 
 const contentStyle = {
@@ -10,5 +11,22 @@ const contentStyle = {
 };
 
 export default function AppContent() {
-  return <Content style={contentStyle}>Content</Content>;
+  const { assets, crypto } = useCrypto();
+
+  const cryptoPriceMap = crypto.reduce((acc, c) => {
+    acc[c.id] = c.price;
+    return acc;
+  }, {});
+
+  return (
+    <Content style={contentStyle}>
+      <Typography.Title level={3} style={{ textAlign: "left", color: "#fff" }}>
+        Portfolio:{" "}
+        {assets
+          .map((asset) => asset.amount * cryptoPriceMap[asset.id])
+          .reduce((acc, val) => (acc += val), 0)
+          .toFixed(2)}
+      </Typography.Title>
+    </Content>
+  );
 }
