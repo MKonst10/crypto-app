@@ -1,0 +1,44 @@
+# Node.js
+node_modules/
+dist/
+build/
+
+# Vite
+.vite/
+*.log
+
+# dotenv
+.env
+.env.local
+.env.*.local
+
+# Editor configs
+.vscode/
+.idea/
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# System files
+Thumbs.db
+
+# OS
+*.swp
+*.bak
+*.tmp
+
+# Optional: Yarn
+.yarn/
+.pnp.*
+yarn.lock
+
+# Optional: Mac/Linux/Windows system files
+*.DS_Store
+*.Trash*
+
+# Optional: Coverage and test outputs
+coverage/
+*.lcov
+
+# Optional: Local production builds
+*.localhost/

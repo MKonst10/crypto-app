@@ -28,6 +28,7 @@ export default function AppContent() {
           .map((asset) => asset.amount * cryptoPriceMap[asset.id])
           .reduce((acc, val) => (acc += val), 0)
           .toFixed(2)}
+        $
       </Typography.Title>
       <PortfolioChart />
       <AssetsTable />
