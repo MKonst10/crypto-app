@@ -1,5 +1,7 @@
 import { Layout, Typography } from "antd";
 import { useCrypto } from "../../context/crypto-context";
+import PortfolioChart from "../PortfolioChart";
+import AssetsTable from "../AssetsTable";
 const { Content } = Layout;
 
 const contentStyle = {
@@ -27,6 +29,8 @@ export default function AppContent() {
           .reduce((acc, val) => (acc += val), 0)
           .toFixed(2)}
       </Typography.Title>
+      <PortfolioChart />
+      <AssetsTable />
     </Content>
   );
 }
