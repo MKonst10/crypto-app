@@ -24,7 +24,7 @@ export default function AppContent() {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: isMobile ? "flex-start" : "center",
+    justifyContent: "flex-start",
     gap: 30,
   };
 

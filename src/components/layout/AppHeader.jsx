@@ -1,19 +1,10 @@
-import { Layout, Select, Space, Button, Modal, Drawer } from "antd";
+import { Layout, Select, Space, Button, Modal, Drawer, Grid } from "antd";
 import { useCrypto } from "../../context/crypto-context";
 import { useEffect, useState } from "react";
 import CoinInfoModal from "../CoinInfoModal";
 import AddAssetForm from "../AddAssetForm";
 const { Header } = Layout;
-
-const headerStyle = {
-  textAlign: "center",
-  height: 60,
-  padding: "1rem",
-  display: "flex",
-  gap: 20,
-  justifyContent: "space-between",
-  alignItems: "center",
-};
+const { useBreakpoint } = Grid;
 
 export default function AppHeader() {
   const [select, setSelect] = useState(false);
@@ -21,6 +12,18 @@ export default function AppHeader() {
   const [modal, setModal] = useState(false);
   const [drawer, setDrawer] = useState(false);
   const { crypto } = useCrypto();
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
+
+  const headerStyle = {
+    textAlign: "center",
+    height: 60,
+    padding: "1rem",
+    display: "flex",
+    gap: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
 
   useEffect(() => {
     const keypress = (event) => {
@@ -70,7 +73,7 @@ export default function AppHeader() {
       </Modal>
 
       <Drawer
-        width={"40%"}
+        width={isMobile ? "80%" : "40%"}
         title="Add asset"
         open={drawer}
         onClose={() => setDrawer(false)}
