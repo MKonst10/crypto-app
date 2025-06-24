@@ -1,23 +1,32 @@
-import { Layout, Card, Statistic, List, Typography, Tag } from "antd";
+import { Layout, Card, Statistic, List, Typography, Tag, Grid } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { capitalize } from "../../utils/utils";
 import { useContext } from "react";
 import CryptoContext from "../../context/crypto-context";
 const { Sider } = Layout;
-
-const siderStyle = {
-  padding: "1rem",
-};
+const { useBreakpoint } = Grid;
 
 export default function AppSider() {
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
   const { assets } = useContext(CryptoContext);
+
+  const siderStyle = {
+    padding: isMobile ? "0" : "1rem",
+  };
 
   if (!assets.length) {
     return null;
   }
 
   return (
-    <Sider width="25%" style={siderStyle}>
+    <Sider
+      width="25%"
+      style={siderStyle}
+      collapsed={isMobile}
+      collapsedWidth="0"
+      trigger={null}
+    >
       {assets.map((asset) => (
         <Card key={asset.id} style={{ marginBottom: "1rem" }}>
           <Statistic
@@ -32,15 +41,21 @@ export default function AppSider() {
             size="small"
             dataSource={[
               {
-                title: "Total Profit",
+                title: "Total Profit:",
                 value: asset.totalProfit,
                 withTag: true,
               },
-              { title: "Asset Amount", value: asset.amount, isPlain: true },
+              { title: "Asset Amount:", value: asset.amount, isPlain: true },
             ]}
             renderItem={(item) => (
               <List.Item
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "5px",
+                  flexWrap: "wrap",
+                }}
               >
                 <span>{item.title}</span>
                 <span>

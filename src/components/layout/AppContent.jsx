@@ -1,30 +1,32 @@
-import { Layout, Typography } from "antd";
+import { Layout, Typography, Grid } from "antd";
 import { useCrypto } from "../../context/crypto-context";
 import PortfolioChart from "../PortfolioChart";
 import AssetsTable from "../AssetsTable";
 const { Content } = Layout;
-
-const contentStyle = {
-  textAlign: "center",
-  minHeight: "calc(100vh - 60px)",
-  color: "#fff",
-  backgroundColor: "#001529",
-  padding: "1rem",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 30,
-};
+const { useBreakpoint } = Grid;
 
 export default function AppContent() {
   const { assets, crypto } = useCrypto();
-  console.log(assets);
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
 
   const cryptoPriceMap = crypto.reduce((acc, c) => {
     acc[c.id] = c.price;
     return acc;
   }, {});
+
+  const contentStyle = {
+    textAlign: "center",
+    minHeight: "calc(100vh - 60px)",
+    color: "#fff",
+    backgroundColor: "#001529",
+    padding: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: isMobile ? "flex-start" : "center",
+    gap: 30,
+  };
 
   return (
     <Content style={contentStyle}>
