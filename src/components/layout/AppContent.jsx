@@ -1,7 +1,8 @@
-import { Layout, Typography, Grid } from "antd";
+import { Layout, Typography, Grid, Divider, Flex } from "antd";
 import { useCrypto } from "../../context/crypto-context";
 import PortfolioChart from "../PortfolioChart";
 import AssetsTable from "../AssetsTable";
+import AssetCard from "../AssetCard";
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
 
@@ -45,7 +46,12 @@ export default function AppContent() {
             $
           </Typography.Title>
           <PortfolioChart />
-          <AssetsTable />{" "}
+          <AssetsTable />
+          {isMobile && (
+            <Flex gap="middle" vertical>
+              <AssetCard />
+            </Flex>
+          )}
         </>
       ) : (
         <>

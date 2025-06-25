@@ -1,4 +1,4 @@
-import { Layout, Select, Space, Button, Modal, Drawer, Grid } from "antd";
+import { Layout, Select, Space, Button, Modal, Drawer, Grid, Flex } from "antd";
 import { useCrypto } from "../../context/crypto-context";
 import { useEffect, useState } from "react";
 import CoinInfoModal from "../CoinInfoModal";
@@ -64,6 +64,9 @@ export default function AppHeader() {
           </Space>
         )}
       />
+
+      <Flex gap={"middle"} align={"center"}></Flex>
+
       <Button type="primary" onClick={() => setDrawer(true)}>
         Add Asset
       </Button>
