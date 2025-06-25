@@ -1,4 +1,14 @@
-import { Layout, Select, Space, Button, Modal, Drawer, Grid, Flex } from "antd";
+import {
+  Layout,
+  Select,
+  Space,
+  Button,
+  Modal,
+  Drawer,
+  Grid,
+  Flex,
+  Typography,
+} from "antd";
 import { useCrypto } from "../../context/crypto-context";
 import { useEffect, useState } from "react";
 import CoinInfoModal from "../CoinInfoModal";
@@ -65,7 +75,9 @@ export default function AppHeader() {
         )}
       />
 
-      <Flex gap={"middle"} align={"center"}></Flex>
+      <Flex gap={"middle"} align={"center"}>
+        <img src="../../../public/fav.svg" alt="Crypto Tracker" />
+      </Flex>
 
       <Button type="primary" onClick={() => setDrawer(true)}>
         Add Asset
