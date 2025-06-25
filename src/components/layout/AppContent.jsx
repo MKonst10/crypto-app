@@ -48,7 +48,7 @@ export default function AppContent() {
           <PortfolioChart />
           <AssetsTable />
           {isMobile && (
-            <Flex gap="middle" vertical>
+            <Flex gap="middle" vertical style={{ width: "100%" }}>
               <AssetCard />
             </Flex>
           )}

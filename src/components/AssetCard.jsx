@@ -10,7 +10,7 @@ export default function AssetCard() {
   return (
     <>
       {assets.map((asset) => (
-        <Card key={asset.id} style={{ marginBottom: "1rem" }}>
+        <Card key={asset.id} style={{ marginBottom: "1rem", width: "100%" }}>
           <Statistic
             title={capitalize(asset.id)}
             value={asset.totalAmount}
