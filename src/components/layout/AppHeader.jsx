@@ -76,7 +76,7 @@ export default function AppHeader() {
       />
 
       <Flex gap={"middle"} align={"center"}>
-        <img src="../../../public/fav.svg" alt="Crypto Tracker" />
+        <img src="/fav.svg" alt="Crypto Tracker" />
       </Flex>
 
       <Button type="primary" onClick={() => setDrawer(true)}>
