@@ -57,7 +57,12 @@ export default function AppContent() {
         <>
           <Typography.Title
             level={3}
-            style={{ textAlign: "center", color: "#fff" }}
+            style={{
+              textAlign: "center",
+              color: "#fff",
+              marginTop: "50%",
+              margin: "auto",
+            }}
           >
             Add your first asset
           </Typography.Title>
