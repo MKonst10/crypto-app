@@ -32,17 +32,16 @@ export default function CoinInfoModal({ coin }) {
         <Typography.Text strong>Market Cap: </Typography.Text>
         {coin.marketCap.toFixed(2)}$
       </Typography.Paragraph>
-      <Typography.Paragraph>
-        <Typography.Text strong>Website:</Typography.Text>
-        <Typography.Link
-          strong
-          href={coin.websiteUrl ? coin.websiteUrl : "none"}
-          target="_blank"
-        >
-          {" "}
-          {coin.websiteUrl ? coin.websiteUrl : "none"}
-        </Typography.Link>
-      </Typography.Paragraph>
+      {coin.websiteUrl && (
+        <Typography.Paragraph>
+          <Typography.Text strong>Website:</Typography.Text>
+          <Typography.Link strong href={coin.websiteUrl} target="_blank">
+            {" "}
+            {coin.websiteUrl}
+          </Typography.Link>
+        </Typography.Paragraph>
+      )}
+
       {coin.contractAddress && (
         <Typography.Paragraph>
           <Typography.Text strong>Contract Address: </Typography.Text>

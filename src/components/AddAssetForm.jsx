@@ -7,10 +7,12 @@ import {
   Button,
   DatePicker,
   Result,
+  Grid,
 } from "antd";
 import { useRef, useState } from "react";
 import { useCrypto } from "../context/crypto-context";
 import CoinInfo from "./CoinInfo";
+const { useBreakpoint } = Grid;
 
 const validateMessages = {
   required: "${label} is Required",
@@ -28,6 +30,8 @@ export default function AddAssetForm({ onClose }) {
   const [coin, setCoin] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const assetRef = useRef();
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
 
   if (submitted) {
     return (
@@ -132,9 +136,11 @@ export default function AddAssetForm({ onClose }) {
         <InputNumber onChange={handlePriceChange} style={{ width: "100%" }} />
       </Form.Item>
 
-      <Form.Item label="Date & Time" name="date">
-        <DatePicker showTime />
-      </Form.Item>
+      {!isMobile && (
+        <Form.Item label="Date & Time" name="date">
+          <DatePicker showTime />
+        </Form.Item>
+      )}
 
       <Form.Item label="Total" name="total">
         <InputNumber disabled style={{ width: "100%" }} />
